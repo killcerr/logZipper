@@ -7,5 +7,8 @@ target("logZipper")
     if is_os("android") then 
         add_cxflags("-static")
     end
+    if is_os("windows") then
+        set_toolchains("msvc")
+    end
     add_files("dllmain.cpp")
     add_files("deflate/lib/**.c")
