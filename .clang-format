@@ -1,0 +1,9 @@
+Language:        Cpp
+BasedOnStyle:  Google
+SortIncludes:   false
+IndentWidth:    4
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: true
+ColumnLimit:    10000
