@@ -1,2 +1,2 @@
 # logZipper
-automatically zipping log and dmp files
+automatically zipping log files
