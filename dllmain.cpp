@@ -80,7 +80,7 @@ void __attribute__((constructor)) on_load() {
   std::filesystem::directory_entry entry(rstr);
   std::thread thrd([rstr]{
 		std::filesystem::directory_entry entry(rstr);
-        foreach_dirs(entry, fout);
+        foreach_dirs(entry, std::cout);
   });
 thrd.detach();
 }
