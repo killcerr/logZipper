@@ -67,17 +67,21 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 }
 #else
 void __attribute__((constructor)) on_load() {
-    auto pstr = std::filesystem::temp_directory_path().string();
-    const auto beg = pstr.find("com");
-    std::string rstr;
-    for (size_t i = beg; i < pstr.size(); i++) {
-        if (pstr[i] == '/')
-            break;
-        else
-            rstr += pstr[i];
-    }
-    rstr = "/sdcard/Android/data/" + rstr + "/files/games/com.mojang/logs/";
-    std::filesystem::directory_entry entry(rstr);
-    foreach_dirs(entry, std::cout);
+  auto pstr = std::filesystem::temp_directory_path().string();
+  const auto beg = pstr.find("com");
+  std::string rstr;
+  for (size_t i = beg; i < pstr.size(); i++) {
+    if (pstr[i] == '/')
+      break;
+    else
+      rstr += pstr[i];
+  }
+  rstr = "/sdcard/Android/data/" + rstr + "/files/games/com.mojang/logs/";
+  std::filesystem::directory_entry entry(rstr);
+  std::thread thrd([rstr]{
+		std::filesystem::directory_entry entry(rstr);
+        foreach_dirs(entry, fout);
+  });
+thrd.detach();
 }
 #endif
